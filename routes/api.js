@@ -1,18 +1,14 @@
 import express from "express";
-import { profile } from "../controllers/api/UserController.js";
-
-import { loginPolicy, loginAdds, userLogin } from "../controllers/api/userPublicController.js";
+import { jwtAuth } from "../middleware/jwtAuth.js";
+import { register, login } from "../controllers/api/AuthController.js";
+import { getAllActiveGames } from "../controllers/api/GameController.js";
 
 const router = express.Router();
 
-// User Profile API
-router.get("/profile/:id", profile);
+router.post("/register", register);
+router.post("/login", login);
+
+router.get("/games_list", jwtAuth, getAllActiveGames);
 
 
-
-router.get("/loginPolicy/:id", loginPolicy);
-router.get("/loginAdds", loginAdds);
-router.post("/user_login",userLogin);
 export default router;
-
-

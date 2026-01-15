@@ -57,7 +57,6 @@ export async function loginPolicy(req, res) {
   }
 }
 
-
 export async function loginAdds(req, res) {
   try {
     const BASE_URL = process.env.BASE_URL || "";
@@ -96,9 +95,6 @@ export async function loginAdds(req, res) {
     });
   }
 }
-
-
-
 
 export async function userLogin(req, res) {
   const { phone, fcm_token, device_id } = req.body;

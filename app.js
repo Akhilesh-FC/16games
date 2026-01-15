@@ -20,11 +20,18 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(
   session({
+    name: "admin_session",
     secret: process.env.SESSION_SECRET || "secret123",
     resave: false,
     saveUninitialized: false,
+    cookie: {
+      httpOnly: true,
+      secure: false,            // https ho to true
+      maxAge: 1000 * 60 * 2   // ⏱ 10 MINUTE AUTO LOGOUT
+    }
   })
 );
+
 
 app.use((req, res, next) => {
   res.locals.session = req.session || {};
@@ -40,6 +47,16 @@ app.use((req, res, next) => {
 
   next();
 });
+
+
+app.use((req, res, next) => {
+  if (req.session && req.session.admin) {
+    req.session.touch();
+  }
+  next();
+});
+
+
 
 // ⭐⭐ GLOBAL TIME MIDDLEWARE
 app.use(requestTime);    // <----- IMPORTANT
