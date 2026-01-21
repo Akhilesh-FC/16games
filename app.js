@@ -72,7 +72,7 @@ import apiRoutes from "./routes/api.js";
 import webRoutes from "./routes/web.js";
 
 app.use("/api", apiRoutes);
-app.use("/", autoAuth, webRoutes);
+app.use("/admin", autoAuth, webRoutes);
 
 app.listen(process.env.PORT, () => {
   console.log(`🚀 Server running at ${process.env.APP_URL}`);

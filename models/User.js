@@ -27,11 +27,11 @@ class User {
   }
 
   /* ===== CREATE USER ===== */
-  static async create({ name, email, mobile, password }) {
+  static async create({ name, email, mobile, password, wallet }) {
     const [result] = await db.query(
-      `INSERT INTO users (name, email, mobile, password)
-       VALUES (?, ?, ?, ?)`,
-      [name, email, mobile, password]
+      `INSERT INTO users (name, email, mobile, password, wallet)
+       VALUES (?, ?, ?, ?,?)`,
+      [name, email, mobile, password, wallet]
     );
     return result.insertId;
   }
